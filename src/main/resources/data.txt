@@ -1,0 +1,7 @@
+Dolar,USD,1.0,Dolar,USD,1.0
+Euro,EU,0.75,Euro,EU,0.75
+Soles,Sol,3.75,Soles,Sol,3.75
+Yen,Y,2.1,Yen,Y,2.1
+Dolar Canadiense,USDC,1.5,Dolar Canadiense,USDC,1.5
+Bolivares,Bs,4.85,Bolivares,Bs,4.85
+Pesos Colombianos,CUP,375,Pesos Colombianos,CUP,375
