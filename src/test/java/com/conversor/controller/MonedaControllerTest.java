@@ -42,7 +42,7 @@ class MonedaControllerTest {
         mvc.perform(get("/moneda")).andDo(print());
     }
     
-    /*@Test
+    @Test
     void testFindById() throws Exception{
         mvc.perform(get("/moneda/7")
         		.contentType(MediaType.APPLICATION_JSON))
@@ -50,7 +50,7 @@ class MonedaControllerTest {
         		.andExpect(MockMvcResultMatchers.jsonPath("$.descripcion").value("Dolar"))
         		.andExpect(MockMvcResultMatchers.jsonPath("$.simbolo").value("USD"))
         		.andExpect(MockMvcResultMatchers.jsonPath("$.valor").value("1.0"));
-    }*/
+    }
     
     @Test
     @ParameterizedTest(name = "Guardado numero {index}, leyendo la moneda {0} - {argumentsWithNames}")
