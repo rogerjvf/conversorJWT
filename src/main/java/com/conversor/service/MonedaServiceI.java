@@ -14,7 +14,7 @@ public interface MonedaServiceI {
 	public List<Moneda> getAll() throws BussniesRulesException;
 	public void update(Moneda moneda) throws BussniesRulesException;
 	public void delete(Integer id) throws BussniesRulesException;
-	public BigDecimal conversor(Integer idOrigen, Integer IdDestino, BigDecimal monto) throws BussniesRulesException;
+	public String conversor(Integer idOrigen, Integer IdDestino, BigDecimal monto) throws BussniesRulesException;
 	public Optional<Moneda> getMonedaBase();
 	void deleteByName(String name) throws BussniesRulesException;
 	Optional<Moneda> getByDescripcion(String descripcion) throws BussniesRulesException;

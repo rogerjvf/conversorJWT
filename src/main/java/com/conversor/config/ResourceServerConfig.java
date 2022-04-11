@@ -38,7 +38,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/moneda/**" ).authenticated()
                 .antMatchers("/tokens/**" ).permitAll()
-                .antMatchers("/swagger/swagger-ui/**" ).authenticated();
+                .antMatchers("/swagger/swagger-ui/**" ).permitAll();
     }    
 
 }

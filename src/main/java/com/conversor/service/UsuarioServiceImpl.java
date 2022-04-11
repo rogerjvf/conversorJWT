@@ -28,6 +28,8 @@ public class UsuarioServiceImpl implements UserDetailsService{
 		
 		Usuario usuario = repo.findOneByUsername(username);
 		
+		usuario.getRoles().forEach((a)->System.out.println(a.getDescripcion()));
+		
 		if(usuario == null) {
 			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
 		}

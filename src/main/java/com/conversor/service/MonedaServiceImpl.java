@@ -1,6 +1,7 @@
 package com.conversor.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -81,7 +82,6 @@ public class MonedaServiceImpl implements MonedaServiceI {
 	
 	@Override
 	public Optional<Moneda> getByDescripcion(String descripcion) throws BussniesRulesException {
-		log.info("En el service metodo getByDescripcion");
 		Optional<Moneda> moneda= repo.getByName(descripcion);
 		if(moneda.isEmpty())
 			throw new BussniesRulesException("1000.1","No Existe moneda con la descripcion enviada", HttpStatus.NO_CONTENT);
@@ -94,8 +94,7 @@ public class MonedaServiceImpl implements MonedaServiceI {
 	}
 	
 	@Override
-	public BigDecimal conversor(Integer idOrigen, Integer IdDestino, BigDecimal monto) throws BussniesRulesException { 
-		log.info("Ingreso a Service conversor");
+	public String conversor(Integer idOrigen, Integer IdDestino, BigDecimal monto) throws BussniesRulesException { 
 		if(idOrigen==IdDestino)
 			throw new BussniesRulesException("999","No se puede realizar una transaccion a una misma moneda", HttpStatus.NO_CONTENT);
 		
@@ -104,7 +103,6 @@ public class MonedaServiceImpl implements MonedaServiceI {
 		
 		Optional<Moneda> monedaBase = repo.getMonedaBase();
 		if(monedaBase.isEmpty()) { 
-			log.info("moneda vase es vacio");
 			throw new BussniesRulesException("1001","No Existe Moneda base, no se puede completar la operacion", HttpStatus.NO_CONTENT);
 		}
 			
@@ -112,7 +110,6 @@ public class MonedaServiceImpl implements MonedaServiceI {
 		Optional<Moneda> destinoMoneda = repo.findById(IdDestino);
 		
 		if(origenMoneda.isEmpty() || origenMoneda.isEmpty()) {
-			log.info("moneda de destino o origen no existe");
 			throw new BussniesRulesException("1003","No Existe Moneda Origen o moneda Destino, no se puede completar la operacion", HttpStatus.NO_CONTENT);
 		}	
 			
@@ -121,13 +118,13 @@ public class MonedaServiceImpl implements MonedaServiceI {
 		if(origenMoneda.get().isMonedaBase()) {
 			montoResult = monto.multiply(destinoMoneda.get().getValor());
 		}else if(destinoMoneda.get().isMonedaBase()) {
-			montoResult = monto.divide(origenMoneda.get().getValor());
+			montoResult = monto.divide(origenMoneda.get().getValor(),2, RoundingMode.HALF_UP);
 		}else {
-			montoResult=monto.divide(origenMoneda.get().getValor());
+			montoResult=monto.divide(origenMoneda.get().getValor(),2, RoundingMode.HALF_UP);
 			montoResult= montoResult.multiply(destinoMoneda.get().getValor());
 		}
 		
-		return montoResult;
+		return montoResult.toString();
 	}
 
 }
