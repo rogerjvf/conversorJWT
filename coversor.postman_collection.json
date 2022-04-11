@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "a26eddfa-3ba1-467e-9777-7f1058687727",
+		"name": "coversor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "oauth/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "conversioncodex",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "conversionmediapp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update moneda",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiY29udmVyc2lvbnJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjQ5NjQwMjIxLCJhdXRob3JpdGllcyI6WyJEQkEiLCJBRE1JTiJdLCJqdGkiOiJkMjI3MzIzOC0wMjhiLTQzM2MtODI5Mi0wMzg4N2UyNzg3YTEiLCJjbGllbnRfaWQiOiJjb252ZXJzaW9ubWVkaWFwcCJ9.hx8pbc9TUvtlw8hxMfF1nPA8NWvwRTXf9zFzxMFacgg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n    \"id\": 51,\r\n    \"descripcion\": \"Soles\",\r\n    \"simbolo\": \"SOL\",\r\n    \"valor\": 3.80,\r\n    \"monedaBase\": false\r\n  }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/moneda/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"moneda",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calculo conversion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiY29udmVyc2lvbnJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjQ5NjM5NzgzLCJhdXRob3JpdGllcyI6WyJEQkEiLCJBRE1JTiJdLCJqdGkiOiI0ZGI1NTdiNS04YmY4LTQwMTctODdhYi0wZDg5MzdkMjVjNTciLCJjbGllbnRfaWQiOiJjb252ZXJzaW9ubWVkaWFwcCJ9.DFTO6IZUTJKikyJB7HIklCY2c7t01TXLtssKQsrdyQk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"descripcion\": \"strings\",\r\n  \"simbolo\": \"strings\",\r\n  \"valor\": 1,\r\n  \"monedaBase\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/moneda/conversion/50/51/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"moneda",
+						"conversion",
+						"50",
+						"51",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete moneda",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiY29udmVyc2lvbnJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjQ5NjQwMjIxLCJhdXRob3JpdGllcyI6WyJEQkEiLCJBRE1JTiJdLCJqdGkiOiJkMjI3MzIzOC0wMjhiLTQzM2MtODI5Mi0wMzg4N2UyNzg3YTEiLCJjbGllbnRfaWQiOiJjb252ZXJzaW9ubWVkaWFwcCJ9.hx8pbc9TUvtlw8hxMfF1nPA8NWvwRTXf9zFzxMFacgg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/moneda/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"moneda",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save moneda",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiY29udmVyc2lvbnJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjQ5NjQwMjIxLCJhdXRob3JpdGllcyI6WyJEQkEiLCJBRE1JTiJdLCJqdGkiOiJkMjI3MzIzOC0wMjhiLTQzM2MtODI5Mi0wMzg4N2UyNzg3YTEiLCJjbGllbnRfaWQiOiJjb252ZXJzaW9ubWVkaWFwcCJ9.hx8pbc9TUvtlw8hxMfF1nPA8NWvwRTXf9zFzxMFacgg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n    \"descripcion\": \"Soles\",\r\n    \"simbolo\": \"SOL\",\r\n    \"valor\": 3.80,\r\n    \"monedaBase\": false\r\n  }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/moneda/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"moneda",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

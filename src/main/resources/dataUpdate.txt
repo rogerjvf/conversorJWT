@@ -1,0 +1,6 @@
+Euro,EU,0.77,False
+Soles,Sol,3.80,False
+Yen,Y,2.5,False
+Dolar Canadiense,USDC,1.7,False
+Bolivares,Bs,4.99,False
+Pesos Colombianos,CUP,389,False
