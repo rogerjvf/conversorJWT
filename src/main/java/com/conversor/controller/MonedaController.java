@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.conversor.exceptions.BussniesRulesException;
 import com.conversor.model.Moneda;
-import com.conversor.service.MonedaServiceImpl;
+import com.conversor.service.impl.MonedaServiceImpl;
 
 @RestController
 @RequestMapping("moneda")

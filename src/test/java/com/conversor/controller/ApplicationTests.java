@@ -25,7 +25,7 @@ class ApplicationTests {
 	@Autowired
 	MockMvc mock;
 
-	@Test
+	/*@Test
 	@Order(4)
 	void testAltaMoneda() throws Exception{
 		mock.perform(post("/moneda/save")
@@ -34,6 +34,6 @@ class ApplicationTests {
     			//.content(requestJson))
     			.andDo(print())
     			.andExpect(status().isCreated());
-	}
+	}*/
 
 }
