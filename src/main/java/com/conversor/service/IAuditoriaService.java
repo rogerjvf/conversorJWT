@@ -1,7 +1,6 @@
 package com.conversor.service;
 
 import com.conversor.dto.AuditoriaDTO;
-import com.conversor.model.Auditoria;
 
 public interface IAuditoriaService {
 

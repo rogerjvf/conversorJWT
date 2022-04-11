@@ -13,7 +13,7 @@ import lombok.Data;
 public class Rol {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRol;
 
 	@Column(name = "nombre")
