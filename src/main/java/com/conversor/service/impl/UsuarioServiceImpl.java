@@ -3,6 +3,8 @@ package com.conversor.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.conversor.model.Usuario;
 import com.conversor.repo.UsuarioRepoI;
 
+@Log4j2
 @Service
 public class UsuarioServiceImpl implements UserDetailsService{
 
@@ -24,11 +27,11 @@ public class UsuarioServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		System.out.println("UsuarioServiceImpl metodo loadUserByUsername");
+		log.info("UsuarioServiceImpl metodo loadUserByUsername");
 		
 		Usuario usuario = repo.findOneByUsername(username);
 		
-		usuario.getRoles().forEach((a)->System.out.println(a.getDescripcion()));
+		usuario.getRoles().forEach((a)->log.info(a.getDescripcion()));
 		
 		if(usuario == null) {
 			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
@@ -39,9 +42,9 @@ public class UsuarioServiceImpl implements UserDetailsService{
 		usuario.getRoles().forEach(rol -> {
 			roles.add(new SimpleGrantedAuthority(rol.getNombre()));
 		});
-		
+
 		UserDetails userDetails = new User(usuario.getUsername(), usuario.getPassword(), roles);
 		return userDetails;
-	
+
 	}
 }

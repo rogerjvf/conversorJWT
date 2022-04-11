@@ -1,11 +1,13 @@
 package com.conversor.service.impl;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+@Log4j2
 @Service
 public class RestAuthServiceImpl {
 
@@ -29,11 +31,11 @@ public class RestAuthServiceImpl {
 		
 		Authentication autho = SecurityContextHolder.getContext().getAuthentication();
 		if(!(autho instanceof AnonymousAuthenticationToken)) {
-			System.out.println(autho.getName());
+			log.info("name: "+autho.getName());
 			
 			for (GrantedAuthority auth : autho.getAuthorities()) {
 				String rolUser = auth.getAuthority();
-				System.out.println(rolUser);
+				log.info("rolUser: "+rolUser);
 				
 				for (String rolMet : metodoRoles) { 
 					if (rolUser.equalsIgnoreCase(rolMet)) {

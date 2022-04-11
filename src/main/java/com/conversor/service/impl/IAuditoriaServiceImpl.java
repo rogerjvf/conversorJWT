@@ -9,6 +9,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 @Log4j2
 @Service
 @RequiredArgsConstructor
@@ -24,5 +27,19 @@ public class IAuditoriaServiceImpl implements IAuditoriaService {
         auditoria.setTipoModificacion(auditoriaDTO.getTipoModificacion());
         auditoria.setUsuario(auditoriaDTO.getUsuario());
         iAuditoriaRepository.save(auditoria);
+    }
+
+    @Override
+    public String getFechaActual() {
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
+    @Override
+    public AuditoriaDTO getAuditoriaDTO(String tipoModificacion,String usuario) {
+        AuditoriaDTO auditoriaDTO = new AuditoriaDTO();
+        auditoriaDTO.setFechaRegistro(getFechaActual());
+        auditoriaDTO.setTipoModificacion(tipoModificacion);
+        auditoriaDTO.setUsuario(usuario);
+        return auditoriaDTO;
     }
 }

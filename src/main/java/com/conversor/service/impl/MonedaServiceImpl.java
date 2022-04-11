@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import com.conversor.dto.MonedaDTO;
 import com.conversor.service.MonedaServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,7 +98,7 @@ public class MonedaServiceImpl implements MonedaServiceI {
 	
 	@Override
 	public String conversor(Integer idOrigen, Integer IdDestino, BigDecimal monto) throws BussniesRulesException { 
-		if(idOrigen==IdDestino)
+		if(idOrigen.equals(IdDestino))
 			throw new BussniesRulesException("999","No se puede realizar una transaccion a una misma moneda", HttpStatus.NO_CONTENT);
 		
 		if(monto.compareTo(BigDecimal.ZERO)<0 || monto.compareTo(BigDecimal.ZERO)==0 )
@@ -127,6 +128,16 @@ public class MonedaServiceImpl implements MonedaServiceI {
 		}
 		
 		return montoResult.toString();
+	}
+
+	public Moneda MapMonedaDtoTOMoneda(MonedaDTO monedaDTO){
+		Moneda moneda = new Moneda();
+		moneda.setId(monedaDTO.getId());
+		moneda.setSimbolo(monedaDTO.getSimbolo());
+		moneda.setValor(monedaDTO.getValor());
+		moneda.setDescripcion(monedaDTO.getDescripcion());
+		moneda.setMonedaBase(monedaDTO.isMonedaBase());
+		return moneda;
 	}
 
 }

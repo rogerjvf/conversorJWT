@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +17,7 @@ public class AuthException implements AuthenticationEntryPoint {
 	
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException arg2)
-			throws IOException, ServletException {
+			throws IOException {
 		final Map<String, Object> mapException = new HashMap<>();
 
 		mapException.put("error", "401");

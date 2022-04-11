@@ -2,6 +2,7 @@ package com.conversor.config;
 
 import javax.sql.DataSource;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,10 +19,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+@Log4j2
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -38,9 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		System.out.println("SecurityConfig instanciando el Bean de BCryptPasswordEncoder");
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
+		log.info("SecurityConfig instanciando el Bean de BCryptPasswordEncoder");
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Autowired
@@ -63,9 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception{
 		super.configure(auth);
-		System.out.println("SecurityConfig metodo configure AuthenticationManagerBuilder");
+		log.info("SecurityConfig metodo configure AuthenticationManagerBuilder");
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		//auth.userDetailsService(userDetailsService);
 	}
 	
 	@Override
@@ -91,7 +90,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public TokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
-		//return new JdbcTokenStore(this.dataSource);
 	}
 	
 	@Bean
