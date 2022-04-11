@@ -1,0 +1,15 @@
+version: '2'
+services:
+  postgres:
+    image: 'postgres:latest'
+    restart: always
+    volumes:
+      - './postgres_data:/var/lib/postgresql/data'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=conversion 
+    ports:
+      - '5432:5432'
+    
+    ## docker-compose up -d
