@@ -56,7 +56,7 @@ public class MonedaServiceImpl implements MonedaServiceI {
 	public void update(Moneda moneda) throws BussniesRulesException {
 		if(moneda.isMonedaBase()) {
 			Optional<Moneda> monedaBase = repo.getMonedaBase();
-			if(monedaBase.isPresent()) {
+			if(monedaBase.isPresent() && moneda.getId()!=monedaBase.get().getId()) {
 				throw new BussniesRulesException("1002","No pueden existir dos monedas base", HttpStatus.PARTIAL_CONTENT);
 			}
 		}
